@@ -10,6 +10,7 @@ export function Home() {
         Go to Profile
       </Button>
       <Button screen="Settings">Go to Settings</Button>
+      <Button screen="Login">Sign out</Button>
     </View>
   );
 }

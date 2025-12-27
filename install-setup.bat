@@ -1,0 +1,1 @@
+npx rn-new S23010843 --nativewind --template react-navigation/template

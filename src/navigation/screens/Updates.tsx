@@ -6,14 +6,11 @@ export function Updates() {
     <View 
       style={styles.container}
       accessible={true}
-      accessibilityRole="main"
       accessibilityLabel="Updates screen main content"
     >
-      {/* Updates header */}
       <View 
         accessible={true}
         accessibilityRole="header"
-        accessibilityLevel={1}
       >
         <Text 
           style={styles.heading}

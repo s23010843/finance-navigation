@@ -4,15 +4,16 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import styles, { PrimaryButton } from '../../styles/AuthStyles';
 
-export function Login() {
+export function ResetPassword() {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [sent, setSent] = useState(false);
 
-  const disabled = !email || !password;
+  const disabled = !email || sent;
 
-  function handleSubmit() {
-    navigation.navigate('HomeTabs' as never);
+  function handleSend() {
+    // In a real app you'd call your API here. We'll simulate success.
+    setSent(true);
   }
 
   return (
@@ -21,34 +22,24 @@ export function Login() {
         <ScrollView contentContainerStyle={{ alignItems: 'center' }} keyboardShouldPersistTaps="handled">
           <View style={styles.card}>
             <View style={styles.logo} />
-            <Text style={styles.title}>Welcome back</Text>
-            <Text style={styles.subtitle}>Sign in to continue to Finance Navigation</Text>
+            <Text style={styles.title}>Reset your password</Text>
+            <Text style={styles.subtitle}>Enter your account email and we'll send a reset link.</Text>
 
             <TextInput
               style={styles.input}
               placeholder="Email"
               value={email}
-              onChangeText={setEmail}
+              onChangeText={text => { setEmail(text); if (sent) setSent(false); }}
               keyboardType="email-address"
               autoCapitalize="none"
             />
 
-            <TextInput
-              style={styles.input}
-              placeholder="Password"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-            />
+            <PrimaryButton title={sent ? 'Link sent' : 'Send reset link'} onPress={handleSend} disabled={disabled} />
 
-            <TouchableOpacity onPress={() => navigation.navigate('ResetPassword' as never)}>
-              <Text style={[styles.link, { marginTop: 8 }]}>Forgot password?</Text>
-            </TouchableOpacity>
+            {sent ? <Text style={{ marginTop: 12, textAlign: 'center', color: '#059669' }}>We've sent a reset link to your email.</Text> : null}
 
-            <PrimaryButton title="Sign In" onPress={handleSubmit} disabled={disabled} />
-
-            <TouchableOpacity onPress={() => navigation.navigate('Signup' as never)}>
-              <Text style={styles.link}>Don't have an account? Sign up</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Login' as never)}>
+              <Text style={styles.link}>Back to sign in</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
@@ -56,3 +47,5 @@ export function Login() {
     </SafeAreaView>
   );
 }
+
+export default ResetPassword;

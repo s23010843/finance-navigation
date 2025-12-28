@@ -33,9 +33,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 12,
     padding: 24,
-    shadowColor: '#000',
-    shadowOpacity: 0.08,
-    shadowRadius: 10,
+    /* Replaced deprecated shadow* props with boxShadow for web compatibility.
+       Keep elevation for Android native shadow. */
+    boxShadow: '0px 10px 24px rgba(0,0,0,0.08)',
     elevation: 4,
   },
   title: {

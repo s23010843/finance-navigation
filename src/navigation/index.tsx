@@ -14,6 +14,7 @@ import { Updates } from './screens/Updates';
 import { NotFound } from './screens/NotFound';
 import { Login } from './screens/auth/Login';
 import { Signup } from './screens/auth/Signup';
+import { ResetPassword } from './screens/auth/ResetPassword';
 
 const HomeTabs = createBottomTabNavigator({
   screens: {
@@ -63,6 +64,11 @@ const RootStack = createNativeStackNavigator({
       screen: Signup,
       options: { title: 'Signup' },
       linking: { path: 'signup' },
+    },
+    ResetPassword: {
+      screen: ResetPassword,
+      options: { title: 'Reset Password' },
+      linking: { path: 'reset-password' },
     },
   },
 });

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, TextInput, Text, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView } from 'react-native';
+import { View, TouchableOpacity, TextInput, Text, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import styles, { PrimaryButton } from '../../styles/AuthStyles';
 

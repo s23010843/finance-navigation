@@ -3,13 +3,16 @@ import { View, TouchableOpacity, TextInput, Text, KeyboardAvoidingView, Platform
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import styles, { PrimaryButton } from '../../styles/AuthStyles';
+import { isValidEmail } from '../../utils/validators';
 
 export function ResetPassword() {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [sent, setSent] = useState(false);
+  const [touchedEmail, setTouchedEmail] = useState(false);
 
-  const disabled = !email || sent;
+  const emailValid = isValidEmail(email);
+  const disabled = !emailValid || sent;
 
   function handleSend() {
     // In a real app you'd call your API here. We'll simulate success.
@@ -29,10 +32,14 @@ export function ResetPassword() {
               style={styles.input}
               placeholder="Email"
               value={email}
-              onChangeText={text => { setEmail(text); if (sent) setSent(false); }}
+              onChangeText={text => { setEmail(text); setTouchedEmail(true); if (sent) setSent(false); }}
               keyboardType="email-address"
               autoCapitalize="none"
             />
+
+            {touchedEmail && !emailValid && email.length > 0 ? (
+              <Text style={{ color: '#dc2626', alignSelf: 'flex-start', marginTop: 4 }}>Please enter a valid email address.</Text>
+            ) : null}
 
             <PrimaryButton title={sent ? 'Link sent' : 'Send reset link'} onPress={handleSend} disabled={disabled} />
 

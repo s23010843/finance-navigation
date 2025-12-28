@@ -3,13 +3,16 @@ import { View, TouchableOpacity, TextInput, Text, KeyboardAvoidingView, Platform
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import styles, { PrimaryButton } from '../../styles/AuthStyles';
+import { isValidEmail } from '../../utils/validators';
 
 export function Login() {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [touchedEmail, setTouchedEmail] = useState(false);
 
-  const disabled = !email || !password;
+  const emailValid = isValidEmail(email);
+  const disabled = !emailValid || !password;
 
   function handleSubmit() {
     navigation.navigate('HomeTabs' as never);
@@ -28,10 +31,13 @@ export function Login() {
               style={styles.input}
               placeholder="Email"
               value={email}
-              onChangeText={setEmail}
+              onChangeText={(t) => { setEmail(t); setTouchedEmail(true); }}
               keyboardType="email-address"
               autoCapitalize="none"
             />
+            {touchedEmail && !emailValid && email.length > 0 ? (
+              <Text style={{ color: '#dc2626', alignSelf: 'flex-start', marginTop: 4 }}>Please enter a valid email address.</Text>
+            ) : null}
 
             <TextInput
               style={styles.input}

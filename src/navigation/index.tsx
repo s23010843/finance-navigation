@@ -57,17 +57,17 @@ const RootStack = createNativeStackNavigator({
     },
     Login: {
       screen: Login,
-      options: { title: 'Login' },
+      options: { title: 'S23010843 - Login' },
       linking: { path: 'login' },
     },
     Signup: {
       screen: Signup,
-      options: { title: 'Signup' },
+      options: { title: 'S23010843 - Signup' },
       linking: { path: 'signup' },
     },
     ResetPassword: {
       screen: ResetPassword,
-      options: { title: 'Reset Password' },
+      options: { title: 'S23010843 - Reset Password' },
       linking: { path: 'reset-password' },
     },
   },
